@@ -173,7 +173,7 @@ export default function Search() {
       </div>
 
       {/* Recent Searches */}
-      {recentSearches.length > 0 && (
+      {Array.isArray(recentSearches) && recentSearches.length > 0 && (
         <div className="mt-6">
           <div className="flex justify-between items-center mb-2">
             <h2 className="text-lg font-semibold">Recent searches</h2>
