@@ -8,9 +8,9 @@ import { useSelector } from "react-redux";
 import CartHoverPopup from "../Cart/CartHoverPopup";
 import SettingsDrawer from "../SettingsDrawer/Index";
 
-  const Navbar = () => {
-  const auth = useSelector((store) => store.auth); // ✅ safer, avoid destructuring here
-  const cart = useSelector((store) => store.cart);
+const Navbar = () => {
+  const auth = useSelector((store) => store?.auth ?? {}); // fallback to empty object
+  const cart = useSelector((store) => store?.cart ?? {});
   const navigate = useNavigate();
   const [imageError, setImageError] = useState(false);
   const [isUser, setUser] = useState(false);
@@ -25,7 +25,7 @@ import SettingsDrawer from "../SettingsDrawer/Index";
 
   const handleAvatarClick = () => {
     if (auth?.user?.role === "ROLE_CUSTOMER") {
-      navigate("/home");
+      navigate("/");
     } else {
       navigate("/admin/restaurants");
     }
@@ -34,14 +34,13 @@ import SettingsDrawer from "../SettingsDrawer/Index";
   useEffect(() => {
     if (isUser) {
       setUser(false);
-      navigate("/settingsDrawer");
+      navigate("/");
     }
   }, [isUser]);
 
   return (
     <>
-      <Box className="px-2 sticky top-0 z-50 py-[.6rem] bg-[#f50057]
-       lg:px-20 flex justify-between">
+      <Box className="px-2 sticky top-0 z-50 py-[.6rem] bg-[#f50057] lg:px-20 flex justify-between">
         <div className="flex items-center justify-between p-2">
           <Link to="/">
             <div className="flex items-center">
@@ -70,27 +69,27 @@ import SettingsDrawer from "../SettingsDrawer/Index";
                 <Link to="/offers" className={getLinkClass("/offers")}>
                   %Offers
                 </Link>
-                <SettingsDrawer/>
+                {/* <SettingsDrawer/> */}
               </>
             )}
           </div>
 
           {isHome && (
             <>
-               {/* <div>
-                    {auth.user? (
-                      <Avatar 
-                        onClick={handleAvatarClick} 
-                        sx={{ bgcolor: "white", color: pink.A400 }}
-                      >
-                        {auth.user?.fullName[0].toUpperCase()}
-                      </Avatar>
-                    ) : (
-                      <IconButton onClick={() => navigate("/account/login")}>
-                        <Person />
-                      </IconButton>
-                    )}
-                  </div> */}
+              <div>
+                {auth?.user ? (
+                  <Avatar
+                    onClick={handleAvatarClick}
+                    sx={{ bgcolor: "white", color: pink.A400 }}
+                  >
+                    {auth.user?.fullName?.[0]?.toUpperCase() || "U"}
+                  </Avatar>
+                ) : (
+                  <IconButton onClick={() => navigate("/account/login")}>
+                    <Person />
+                  </IconButton>
+                )}
+              </div>
 
               <div>
                 <IconButton onClick={() => navigate("/cart")}>

@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import "./Home.css";
-import MultiItemCarousel from './MultiItemCorusel';
 import RestaurantCard from '../Restaurant/RestaurantCard';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllRestaurantAction } from '../State/Restaurant/Action';
 import { useNavigate } from 'react-router-dom';
+import MultiItemCarousel from './MultiItemCarousel';
 
 const Home = () => {
   const dispatch = useDispatch();
