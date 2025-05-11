@@ -104,6 +104,14 @@ export const LoginForm = () => {
               Register
             </Button>
           </Typography>
+          <Typography variant="body2" align="center" sx={{ mt: 1 }}>
+            <Button
+              size="small"
+              onClick={() => navigate("/forgotpassword")}
+              color="primary">
+              Forgot Password?
+            </Button>
+          </Typography>
         </div>
       </motion.div>
     </div>

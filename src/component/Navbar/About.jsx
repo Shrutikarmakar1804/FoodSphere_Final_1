@@ -1,4 +1,9 @@
 import { motion } from "framer-motion";
+import { FaHandsHelping } from "react-icons/fa";
+import { IoIosCall } from "react-icons/io";
+import { AiFillCheckCircle } from "react-icons/ai";
+
+
 
 export default function About() {
   return (
@@ -16,8 +21,19 @@ export default function About() {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2, duration: 0.8 }}
           >
-            About Me
+              <AiFillCheckCircle className="inline-block mr-2" />
+            <i>About Me!</i>
+
           </motion.h1>
+          <motion.p
+            className="text-gray-700 mb-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.4, duration: 0.8 }}
+          >
+            At FoodSphere, we believe that food is not just a necessity; it's an experience. Our platform is designed to help you discover the best dining experiences, whether you're looking for a cozy cafe, a fine dining restaurant, or a hidden gem in your city.
+          </motion.p>
+          
           <motion.p
             className="text-gray-700 mb-4"
             initial={{ opacity: 0 }}
@@ -72,11 +88,13 @@ export default function About() {
         >
           <li>
             <a href="/help" className="text-pink-600 hover:underline text-lg">
+              <FaHandsHelping className="inline-block mr-2" />
               Help
             </a>
           </li>
           <li>
             <a href="/contact" className="text-pink-600 hover:underline text-lg">
+              <IoIosCall className="inline-block mr-2" />
               Contact Us
             </a>
           </li>

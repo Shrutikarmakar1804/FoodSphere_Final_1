@@ -1,4 +1,3 @@
-import React from 'react'
 import { Button, Card, CardContent, CardHeader, Grid } from '@mui/material'
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';

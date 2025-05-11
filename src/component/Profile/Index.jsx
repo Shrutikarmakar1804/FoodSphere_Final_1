@@ -29,7 +29,6 @@ export default function SettingsDrawer() {
   const [showConfirmModal, setShowConfirmModal] = useState(false);
 
   const confirmDelete = () => {
-    // Optional: clear user session/localStorage here
     window.location.href = "/";
   };
 
@@ -46,13 +45,13 @@ export default function SettingsDrawer() {
 
   return (
     <>
-      {/* Avatar Icon (trigger button) */}
+      {/* Avatar Icon (trigger button)
       <button
         onClick={() => setOpen(true)}
         className="p-2 rounded-full bg-gray-200 dark:bg-gray-800 hidden md:block"
       >
         <User className="w-5 h-5 text-gray-700 dark:text-white" />
-      </button>
+      </button> */}
 
       {/* MUI Drawer */}
       <Drawer

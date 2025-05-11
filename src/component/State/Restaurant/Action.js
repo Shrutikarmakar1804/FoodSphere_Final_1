@@ -60,7 +60,7 @@ export const getAllRestaurantAction = (token) => {
 
 export const getRestaurantById = (restaurantId, reqData) => {
   return async (dispatch) => {
-    // const token = reqData?.jwt || reqData?.token;
+    //const token = reqData?.jwt || reqData?.token;
     dispatch({ type: GET_RESTAURANT_BY_ID_REQUEST });
     try {
       const response = await api.get(`/api/restaurants/${restaurantId}`, {

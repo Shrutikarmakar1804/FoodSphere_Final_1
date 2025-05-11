@@ -11,7 +11,7 @@ const ForgotPassword = () => {
       alert(`Password reset link sent to ${email}!`);
       navigate('/'); // Redirect to login page
     } else {
-      alert('Please enter your email.');
+      alert('The Otp sent to your email.');
     }
   };
 

@@ -1,3 +1,4 @@
+// Same imports
 import { useState, useEffect } from 'react';
 import { FaSearch } from 'react-icons/fa';
 
@@ -128,7 +129,6 @@ const MOCK_FOOD_DATA = [
     restaurant: "Sweet Indulgence"
   }
 ];
-
 export default function Search() {
   const [query, setQuery] = useState("");
   const [recentSearches, setRecentSearches] = useState(["Pizza", "Burger", "Ice Cream"]);
@@ -154,34 +154,34 @@ export default function Search() {
     const value = e.target.value;
     setQuery(value);
     if (value && !recentSearches.includes(value)) {
-      setRecentSearches([value, ...recentSearches]);
+      setRecentSearches([value, ...recentSearches.slice(0, 5)]);
     }
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white p-6">
-      {/* Search bar */}
-      <div className="flex items-center bg-gray-800 rounded-lg px-4 py-2">
-        <FaSearch className="text-gray-400 mr-2" />
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 text-white p-6">
+      {/* Search Bar */}
+      <div className="flex items-center bg-gray-800 rounded-2xl px-4 py-3 shadow-lg transition-all duration-300">
+        <FaSearch className="text-gray-400 mr-3 text-lg" />
         <input
           type="text"
-          placeholder="Search for restaurant, item or more......."
-          className="bg-transparent outline-none flex-1 text-lg"
+          placeholder="Search for restaurant, item or more..."
+          className="bg-transparent outline-none flex-1 text-lg placeholder-gray-500"
           value={query}
           onChange={handleSearchChange}
         />
       </div>
 
       {/* Recent Searches */}
-      {Array.isArray(recentSearches) && recentSearches.length > 0 && (
+      {recentSearches.length > 0 && (
         <div className="mt-6">
           <div className="flex justify-between items-center mb-2">
-            <h2 className="text-lg font-semibold">Recent searches</h2>
-            <button onClick={handleClearRecent} className="text-green-400 text-sm">Clear</button>
+            <h2 className="text-xl font-semibold">Recent Searches</h2>
+            <button onClick={handleClearRecent} className="text-green-400 hover:text-green-300 text-sm">Clear</button>
           </div>
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-3">
             {recentSearches.map((item, index) => (
-              <div key={index} className="bg-gray-700 px-3 py-1 rounded-full text-sm">
+              <div key={index} className="bg-gray-700 hover:bg-gray-600 px-4 py-1.5 rounded-full text-sm cursor-pointer transition-all">
                 {item}
               </div>
             ))}
@@ -189,41 +189,46 @@ export default function Search() {
         </div>
       )}
 
-      {/* Continue browsing */}
+      {/* Search Results */}
       {query && (
-        <div className="mt-8">
-          <h2 className="text-lg font-semibold mb-4">Search Results</h2>
+        <div className="mt-10">
+          <h2 className="text-2xl font-semibold mb-5">Search Results</h2>
           {filteredItems.length ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredItems.map((item, index) => (
-                <div key={index} className="bg-gray-800 rounded-xl overflow-hidden shadow-md">
+                <div
+                  key={index}
+                  className="bg-gray-800 rounded-xl overflow-hidden shadow-xl transform hover:scale-[1.02] transition-all duration-300"
+                >
                   <img
                     src={item.image}
                     alt={item.name}
-                    className="w-full h-40 object-cover"
+                    className="w-full h-44 object-cover"
                   />
                   <div className="p-4">
-                    <h3 className="text-xl font-bold">{item.name}</h3>
+                    <h3 className="text-xl font-bold text-white">{item.name}</h3>
                     <p className="text-sm text-gray-400 mt-1">From {item.restaurant}</p>
                   </div>
                 </div>
               ))}
             </div>
           ) : (
-            <p className="text-gray-400">No food found</p>
+            <div className="text-gray-400 text-center mt-10">
+              <p className="text-lg">No items matched your search. Try something else!</p>
+            </div>
           )}
         </div>
       )}
 
-      {/* Trending Categories */}
-      <div className="mt-12">
-        <h1 className="text-lg font-semibold mb-2">Trending in your city</h1>
-        <div className="grid grid-cols-3 gap-4">
-          {["Chicken", "Ice Cream", "Smoothie", "BBQ", "Chocolate chip Cookies", "Salad", "Biryani", "Sushi", "Cake"].map((item, idx) => (
+      {/* Trending Section */}
+      <div className="mt-16">
+        <h2 className="text-xl font-semibold mb-4">Trending in Your City</h2>
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+          {["Chicken", "Ice Cream", "Smoothie", "BBQ", "Chocolate Chip Cookies", "Salad", "Biryani", "Sushi", "Cake"].map((item, idx) => (
             <button
               key={idx}
-              className="bg-gray-600 rounded-lg p-3 text-center text-black font-semibold hover:bg-gray-500"
               onClick={() => setQuery(item)}
+              className="bg-gray-700 hover:bg-green-500 hover:text-white transition-all p-3 rounded-xl text-center text-sm font-medium shadow-md"
             >
               {item}
             </button>

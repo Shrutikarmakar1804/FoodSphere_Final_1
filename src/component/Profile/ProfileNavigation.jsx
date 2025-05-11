@@ -37,7 +37,7 @@ const ProfileNavigation = ({ open, handleClose }) => {
       dispatch(logout());
       navigate("/");
     } else {
-      navigate(`/settings/${title.toLowerCase()}`);
+      navigate(`/my-profile/${title.toLowerCase()}`);
     }
     if (isSmallScreen && handleClose) {
       handleClose();
@@ -63,7 +63,6 @@ const ProfileNavigation = ({ open, handleClose }) => {
         {i!== menu.length-1 && <Divider/>}
             </>)}
         </div>
-
       </Drawer>
   );
 };
