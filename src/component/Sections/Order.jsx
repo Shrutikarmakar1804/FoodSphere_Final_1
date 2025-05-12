@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import OrderCard from '../../Profile/OrderCard';
-import { getUsersOrder } from '../../State/Order/Action';
+import OrderCard from '../Profile/OrderCard';
+import { getUsersOrder } from '../State/Order/Action';
 
 const Order = () => {
   const dispatch = useDispatch();
@@ -18,8 +18,7 @@ const Order = () => {
   if (!auth?.jwt) {
     return (
       <div className="flex flex-col items-center justify-center h-screen">
-        <img src=""
-         alt="empty" />
+        <img src="/images/empty.gif" alt="empty" />
         <h2 className="text-white text-lg mt-4">view your orders</h2>
       </div>
     );

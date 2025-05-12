@@ -37,7 +37,7 @@ export const CustomerRoute = () => {
         <Route path="/payment" element={<PaymentPage />} />
         <Route path="/forgotpassword" element={<ForgotPassword />} />
         <Route path="/terms" element={<Terms/>} />
-        <Route path="/my-profile" element={<Profile/>} />
+        <Route path="/my-profile/*" element={<Profile/>} />
         
       </Routes>
       <Auth/>

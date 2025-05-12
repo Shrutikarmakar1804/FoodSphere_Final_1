@@ -57,4 +57,4 @@ label={item.open?"open":'closed'}
   )
 }
 
-export default RestaurantCard
+export default RestaurantCard;

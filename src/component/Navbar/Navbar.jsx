@@ -37,7 +37,7 @@ const Navbar = () => {
   useEffect(() => {
     if (isUser) {
       setUser(false);
-      navigate("/my-profile");
+      navigate("/");
     }
   }, [isUser]);
 

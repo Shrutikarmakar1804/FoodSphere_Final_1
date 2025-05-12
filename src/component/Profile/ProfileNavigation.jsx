@@ -13,9 +13,11 @@ import {
   Logout as LogoutIcon,
   AddReaction,
 } from '@mui/icons-material';
+import DeleteIcon from '@mui/icons-material/Delete';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { logout } from '../State/Authentication/Action';
+
 
 const menu = [
   { title: "Order", icon: <ShoppingBagIcon /> },
@@ -25,45 +27,47 @@ const menu = [
   { title: "Notification", icon: <NotificationsActiveIcon /> },
   { title: "Settings", icon: <SettingsIcon /> },
   { title: "Logout", icon: <LogoutIcon /> },
+  { title: "DeleteAccount", icon: <DeleteIcon /> },
 ];
 
 const ProfileNavigation = ({ open, handleClose }) => {
   const isSmallScreen = useMediaQuery('(max-width:900px)');
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
-  const handleNavigate = ({ title }) => {
-    if (title === "Logout") {
-      dispatch(logout());
-      navigate("/");
-    } else {
-      navigate(`/my-profile/${title.toLowerCase()}`);
+  
+   const handleNavigate=(item)=>{
+          if(item.title==="Logout")
+          {
+              dispatch((logout()))
+              navigate("/")
+          }
+          else
+    navigate(`/my-profile/${item.title.toLowerCase()}`)
     }
-    if (isSmallScreen && handleClose) {
-      handleClose();
-    }
-  };
 
   return (
-    <Drawer 
-      variant={isSmallScreen ? "temporary" : "permanent"} 
-      onClose={handleClose} 
-      open={isSmallScreen ? open : true} 
+    <Drawer
+      variant={isSmallScreen ? "temporary" : "permanent"}
+      onClose={handleClose}
+      open={isSmallScreen ? open : true}
       anchor="left"
-      sx={{ zIndex: 1, position:"sticky" }} >
-        
-        <div className="w-[50vw] lg:w-[20vw] h-[100vh] flex flex-col justify-center text-xl gap-8 pt-16">
-           
-            {menu.map((item,i)=><>
-           
-            <div onClick={()=>handleNavigate(item)} className="px-5 flex items-center space-x-5 cursor-pointer">
-                {item.icon}
-                <span>{item.title}</span>
+      sx={{ zIndex: 1, position: "sticky" }}
+    >
+      <div className="w-[50vw] lg:w-[20vw] h-[100vh] flex flex-col justify-center text-xl gap-8 pt-16">
+        {menu.map((item, i) => (
+          <React.Fragment key={item.title}>
+            <div
+              onClick={() => handleNavigate(item)}
+              className="px-5 flex items-center space-x-5 cursor-pointer"
+            >
+              {item.icon}
+              <span>{item.title}</span>
             </div>
-        {i!== menu.length-1 && <Divider/>}
-            </>)}
-        </div>
-      </Drawer>
+            {i !== menu.length - 1 && <Divider />}
+          </React.Fragment>
+        ))}
+      </div>
+    </Drawer>
   );
 };
 

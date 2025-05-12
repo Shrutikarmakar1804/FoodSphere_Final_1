@@ -10,7 +10,7 @@ const Home = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const jwt = localStorage.getItem("jwt");
-  const { restaurants } = useSelector(store => store);
+ const restaurants = useSelector((state) => state.user); 
 
   useEffect(() => {
     if (!jwt) {
