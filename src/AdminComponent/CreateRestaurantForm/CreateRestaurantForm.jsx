@@ -5,8 +5,8 @@ import { useState } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
 import { uploadImageToCloudinary } from '../util/UploadToCloudinary';
 import { useDispatch } from 'react-redux';
-import { createRestaurant } from '../../component/State/Restaurant/Action'; // Ensure this path and action are correct
 import { useNavigate } from 'react-router-dom';
+import { createRestaurant } from '../../component/State/Restaurant/Action';
 
 
 const initialValues = {
@@ -64,32 +64,12 @@ export const CreateRestaurantForm = () => {
 
       dispatch(createRestaurant({ data, token: jwt }));
    
-
       navigate("/create-restaurant");
       formik.resetForm();
       setUploadImage(false);
-      // Optionally, you can show a success message or redirect the user
-      // after successful creation
-      // For example, you can use a toast notification or alert
       alert("Restaurant created successfully!");
-      // Or redirect to another page
-       navigate("/adminSideBar");
-      // Reset the form after submission
-      // formik.resetForm();
-      // Optionally, you can show a success message or redirect the user
-      // after successful creation
-      // For example, you can use a toast notification or alert
-      // alert("Restaurant created successfully!");
-      // Or redirect to another page
-      // navigate("/some-other-page");
-      // Reset the form after submission
-      // formik.resetForm();
-      // Optionally, you can show a success message or redirect the user
-      // after successful creation
-      // For example, you can use a toast notification or alert
-
-
-    }
+       navigate("/add-menu");
+     }
 
   });
     

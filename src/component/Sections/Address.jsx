@@ -13,13 +13,12 @@ import {
 import { AddLocation } from '@mui/icons-material';
 import AddressCard from '../Cart/AddressCard';
 
-const Address = () => {
+const Address = ({ userEmail }) => {
   const [open, setOpen] = useState(false);
   const [formData, setFormData] = useState({ name: '', street: '', city: '', zip: '' });
   const [addresses, setAddresses] = useState([]);
   const [editIndex, setEditIndex] = useState(null);
 
-  // Snackbar
   const [snackbar, setSnackbar] = useState({ open: false, message: '', severity: 'success' });
 
   const showSnackbar = (message, severity = 'success') => {
@@ -30,16 +29,29 @@ const Address = () => {
     setSnackbar((prev) => ({ ...prev, open: false }));
   };
 
+  // Load addresses from localStorage when userEmail is available
   useEffect(() => {
-    const stored = localStorage.getItem('addresses');
-    if (stored) setAddresses(JSON.parse(stored));
-  }, []);
+    if (!userEmail) return;
+    const key = `addresses_${userEmail}`;
+    const stored = localStorage.getItem(key);
+    if (stored) {
+      try {
+        setAddresses(JSON.parse(stored));
+      } catch (e) {
+        console.error('Failed to parse addresses from localStorage', e);
+      }
+    }
+  }, [userEmail]);
 
+  // Save to localStorage when addresses change
   useEffect(() => {
-    localStorage.setItem('addresses', JSON.stringify(addresses));
-  }, [addresses]);
+    if (!userEmail) return;
+    const key = `addresses_${userEmail}`;
+    localStorage.setItem(key, JSON.stringify(addresses));
+  }, [addresses, userEmail]);
 
   const handleOpen = () => setOpen(true);
+
   const handleClose = () => {
     setFormData({ name: '', street: '', city: '', zip: '' });
     setEditIndex(null);
@@ -89,7 +101,7 @@ const Address = () => {
   };
 
   return (
-    <section className="lg:w-[70%] flex justify-center px-5 pb-10 lg:pb-0">
+    <section className="lg:w flex justify-center px-5 pb-10 lg:pb-0">
       <div>
         <h1 className="text-center font-semibold text-2xl py-10">Choose Delivery Address</h1>
 
@@ -105,7 +117,7 @@ const Address = () => {
             />
           ))}
 
-          <Card className="flex flex-col items-center gap-5 w-64 p-5">
+          <Card className="flex flex-col items-center gap-5 w-70 p-5">
             <AddLocation />
             <div className="space-y-3 text-gray-500 w-full">
               <h1 className="font-semibold text-lg text-white">Add New Address</h1>
@@ -119,11 +131,13 @@ const Address = () => {
         {/* Modal */}
         <Dialog open={open} onClose={handleClose}>
           <DialogTitle>{editIndex !== null ? 'Edit Address' : 'Add New Address'}</DialogTitle>
-          <DialogContent className="space-y-4 py-4">
-            <TextField label="Name" name="name" fullWidth value={formData.name} onChange={handleChange} />
-            <TextField label="Street" name="street" fullWidth value={formData.street} onChange={handleChange} />
-            <TextField label="City" name="city" fullWidth value={formData.city} onChange={handleChange} />
-            <TextField label="ZIP Code" name="zip" fullWidth value={formData.zip} onChange={handleChange} />
+          <DialogContent>
+            <div className="flex flex-col gap-4 mt-6">
+              <TextField label="Name" name="name" fullWidth value={formData.name} onChange={handleChange} />
+              <TextField label="Street" name="street" fullWidth value={formData.street} onChange={handleChange} />
+              <TextField label="City" name="city" fullWidth value={formData.city} onChange={handleChange} />
+              <TextField label="ZIP Code" name="zip" fullWidth value={formData.zip} onChange={handleChange} />
+            </div>
           </DialogContent>
           <DialogActions>
             <Button onClick={handleClose}>Cancel</Button>

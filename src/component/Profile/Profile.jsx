@@ -8,6 +8,8 @@ import Refunds from "../Sections/Refunds";
 import Feedback from "../Sections/Feedback";
 import UserInfo from "../Sections/UserInfo";
 import DeleteAccount from "../Sections/DeleteAccount";
+import Subscription from "../Sections/Subscription";
+import Privacy from "../Sections/Privacy";
 
 const Profile = () => {
   return (
@@ -21,6 +23,8 @@ const Profile = () => {
         <Route path="feedback" element={<Feedback />} />
         <Route path="user-info" element={<UserInfo />} />
         <Route path="delete-account" element={<DeleteAccount/>} />
+        <Route path="subscription" element={<Subscription/>} />
+        <Route path="privacy" element={<Privacy/>}/>
       </Route>
     </Routes>
   );

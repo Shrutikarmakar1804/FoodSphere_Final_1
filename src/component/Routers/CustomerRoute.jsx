@@ -24,7 +24,7 @@ export const CustomerRoute = () => {
 
       <Navbar />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/*" element={<Home />} />
         <Route path="/account/:register" element={<Home />} />
         <Route path="/resturant/city/:title/:id" element={<RestaurantDetails />} />
         <Route path="/search" element={<Search/>} />

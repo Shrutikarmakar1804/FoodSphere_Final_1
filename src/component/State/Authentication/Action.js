@@ -2,6 +2,7 @@ import axios from "axios";
 import { ADD_TO_FAVOURITE_FAILURE, 
     ADD_TO_FAVOURITE_REQUEST,
     ADD_TO_FAVOURITE_SUCCESS, 
+    DELETE_ACCOUNT, 
     GET_USER_FAILURE, 
     GET_USER_REQUEST, 
     GET_USER_SUCCESS, 
@@ -108,6 +109,19 @@ export const logout=()=>async(dispatch)=>{
         localStorage.clear();
         dispatch({type:LOGOUT})
        console.log("logout success")
+
+    } catch (error){
+        console.log("error",error)
+    }
+};
+
+export const deleteaccount=()=>async(dispatch)=>{
+   
+    try{
+
+        localStorage.clear();
+        dispatch({type:DELETE_ACCOUNT})
+       console.log("deleteaccount success")
 
     } catch (error){
         console.log("error",error)

@@ -30,9 +30,9 @@ export const AdminSideBar = ({ open, handleClose }) => {
       dispatch(logout());
       navigate('/');
     } else {
-      navigate(`/admin${item.path}`); // ✅ FIXED path prefix
+      navigate(`/admin${item.path}`); 
     }
-    if (isSmallScreen) handleClose(); // ✅ Only close on small screens
+    if (isSmallScreen) handleClose(); 
   };
 
   return (

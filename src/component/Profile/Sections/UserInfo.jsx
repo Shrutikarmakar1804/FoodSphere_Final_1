@@ -44,11 +44,11 @@ export default function UserInfo() {
   };
 
   return (
-    <div className="max-w-md mx-auto p-4 border rounded-xl shadow space-y-6">
+    <div className="max-w-md mx-auto p-2 border rounded-xl shadow space-y-4">
       {isEditing ? (
         <>
           <h2 className="text-xl font-bold">Edit Your Information</h2>
-          <div className="space-y-4">
+          <div className="space-y-2">
             <label className="block">
               Name:
               <input

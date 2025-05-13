@@ -5,34 +5,33 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUser } from './component/State/Authentication/Action';
 import { findUserCart } from './component/State/Cart/Action';
-import { getRestaurantById } from './component/State/Restaurant/Action';
+import { getRestaurantByUserId, getRestaurantById } from './component/State/Restaurant/Action';
 import process from 'process';
 import { Routers } from './component/Routers/Routers';
-
 
 window.process = process;
 
 function App() {
   const dispatch = useDispatch();
-  const jwt = localStorage.getItem("jwt");
-
-  // Selector should grab the whole auth state, not just auth.user
+  const storedJwt = localStorage.getItem("jwt");
   const auth = useSelector((store) => store.auth);
-
-  const token = auth?.jwt || jwt;
+  const token = auth?.jwt || storedJwt;
 
   useEffect(() => {
     if (token) {
       dispatch(getUser(token));
       dispatch(findUserCart(token));
+      dispatch(getRestaurantByUserId(token)); // Load restaurant for user
     }
   }, [token, dispatch]);
 
-  useEffect(() => {
-    if (jwt) {
-      dispatch(getRestaurantById(jwt));
-    }
-  }, [token, dispatch]);
+  // Optional: Load restaurant by known ID
+  // useEffect(() => {
+  //   const restaurantId = "REPLACE_WITH_ACTUAL_ID";
+  //   if (restaurantId && token) {
+  //     dispatch(getRestaurantById(restaurantId, { jwt: token }));
+  //   }
+  // }, [token, dispatch]);
 
   return (
     <ThemeProvider theme={darkTheme}>

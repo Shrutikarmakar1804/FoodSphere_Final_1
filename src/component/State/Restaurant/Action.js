@@ -1,3 +1,4 @@
+import axios from "axios";
 import api from "../../config/api";
 import {
   CREATE_EVENT_FAILURE,
@@ -58,14 +59,14 @@ export const getAllRestaurantAction = (token) => {
   }
 };
 
-export const getRestaurantById = (restaurantId, reqData) => {
-  return async (dispatch) => {
-    //const token = reqData?.jwt || reqData?.token;
+export const getRestaurantById = (restaurantId, reqData) => 
+   async (dispatch) => {
+    const token = reqData?.jwt || reqData?.token;
     dispatch({ type: GET_RESTAURANT_BY_ID_REQUEST });
     try {
       const response = await api.get(`/api/restaurants/${restaurantId}`, {
         headers: {
-          Authorization: `Bearer ${reqData.jwt}`,
+          Authorization: `Bearer ${reqData?.jwt}`,
         },
       });
       dispatch({ type: GET_RESTAURANT_BY_ID_SUCCESS, payload: response.data });
@@ -73,8 +74,7 @@ export const getRestaurantById = (restaurantId, reqData) => {
       dispatch({ type: GET_RESTAURANT_BY_ID_FAILURE, payload: error.message });
       console.log("error", error);
     }
-  }
-};
+  };
   
 export const getRestaurantByUserId = (jwt) => {
   return async (dispatch) => {
@@ -99,9 +99,9 @@ export const createRestaurant = (reqData) => {
   return async (dispatch) => {
     dispatch({ type: CREATE_RESTAURANT_REQUEST });
     try {
-      const { data } = await api.post(`/api/admin/restaurants`, reqData.data, {
+      const { data } = await axios.post(`${API_URL}/api/admin/restaurants`, reqData.data, {
         headers: {
-          Authorizartion: `Bearer ${reqData.token}`,
+          Authorization: `Bearer ${reqData.token}`,
         },
       });
       dispatch({ type: CREATE_RESTAURANT_SUCCESS, payload: data });
@@ -109,7 +109,7 @@ export const createRestaurant = (reqData) => {
     }
     catch (error) {
       dispatch({ type: CREATE_RESTAURANT_FAILURE, payload: error });
-      console.log("error", error);
+      console.log("catch error", error);
     };
   };
 };

@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // ✅ import
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom'; 
+import { logout } from '../State/Authentication/Action';
 
 function DeleteAccount() {
   const [showConfirmModal, setShowConfirmModal] = useState(true);
-  const navigate = useNavigate(); // ✅ create navigate function
-
+  const navigate = useNavigate(); 
+  const dispatch = useDispatch(); 
   const confirmDelete = () => {
-    alert("Account deleted successfully!"); // ✅ replace with actual delete logic
+    
     setShowConfirmModal(false);
-    navigate("/"); // ✅ redirect to login form page
+    dispatch({ type: "DELETE_ACCOUNT" }); 
+    dispatch(logout()); 
+    navigate("/"); 
   };
 
   return (
